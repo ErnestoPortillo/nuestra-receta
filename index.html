@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nuestra Receta 💗</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-sparkles" aria-hidden="true"></div>
+
+  <!-- INTRO SCREEN -->
+  <section class="intro" id="introScreen" aria-label="Inicio">
+    <div class="intro__card">
+      <div class="intro__heart" aria-hidden="true">💗</div>
+      <h1 class="intro__title">Feliz San Valentín, corazón</h1>
+      <p class="intro__text">
+        Espero que te guste este detalle…<br />
+        De: Tito - Para: Palo.
+      </p>
+      <button class="btn btn--yes intro__btn" id="btnStart" type="button">
+        ✨ Comenzar nuestra receta
+      </button>
+      <div class="intro__hint">Tip: usa pantalla de compu para que se vea más bonito ✨</div>
+    </div>
+  </section>
+
+  <main class="app" id="app" aria-hidden="true">
+    <!-- HUD -->
+    <header class="hud">
+      <div class="badge">
+        <img src="assets/icons/heart.svg" alt="" class="badge__icon" />
+        <div class="badge__text">
+          <div class="badge__title">Nuestra Receta</div>
+          <div class="badge__subtitle" id="hudSubtitle">Fase 1 – Lo que te hace ser tú 💞</div>
+        </div>
+      </div>
+
+      <div class="hud__right">
+        <div class="progress">
+          <div class="progress__row">
+            <span class="progress__label" id="progressLabel">Ingredientes</span>
+            <span class="progress__count" id="progressCount">0/6</span>
+          </div>
+          <div class="progress__bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0">
+            <div class="progress__fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <button class="btn btn--ghost" id="btnReset" type="button" title="Reiniciar">
+          Reiniciar
+        </button>
+      </div>
+    </header>
+
+    <!-- GAME SCENE -->
+    <section class="scene" aria-label="Mesa de cocina">
+      <!-- Note -->
+      <aside class="note" id="note">
+        <div class="note__title" id="noteTitle">Receta:</div>
+        <div class="note__text" id="noteText">
+          Primero, agreguemos algunas de las cosas que me recuerdan a tí 💗
+        </div>
+        <div class="note__hint" id="noteHint">Pasa el mouse por los ingredientes ✨</div>
+      </aside>
+
+      <div class="table">
+        <!-- Ingredients / Memories will be injected here -->
+        <div class="ring" id="ring" aria-label="Items alrededor"></div>
+
+        <!-- Center -->
+        <div class="centerpiece" aria-label="Centro">
+          <div class="centerpiece__glow" aria-hidden="true"></div>
+
+          <div class="bowl-wrap" id="bowlWrap">
+            <img class="bowl" id="bowlImg" src="assets/images/bowl.png" alt="Bowl" draggable="false" />
+
+            <div class="bowl__steam" id="steam" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+
+            <!-- FX -->
+            <div class="bowl__contents" id="bowlContents" aria-hidden="true"></div>
+            <div class="fx-layer" id="fxLayer" aria-hidden="true"></div>
+          </div>
+
+          <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
+        </div>
+      </div>
+
+      <!-- BAKING OVERLAY -->
+      <div class="overlay overlay--hidden" id="overlayBaking" role="dialog" aria-modal="true" aria-label="Horneando">
+        <div class="overlay__content">
+          <div class="oven">
+            <img src="assets/images/horno.png" alt="Horno" class="oven__img" draggable="false" />
+            <div class="oven__heat" aria-hidden="true"></div>
+            <div class="oven__timer" aria-hidden="true">
+              <div class="timer__dot"></div>
+              <div class="timer__text" id="timerText">Horneando amor… 0%</div>
+            </div>
+          </div>
+
+          <div class="overlay__caption">
+            <div class="overlay__title">Ok… ahora a hornear ✨</div>
+            <div class="overlay__sub">Te prometo que esto se está poniendo demasiado lindo.</div>
+          </div>
+
+          <div class="overlay__bar" aria-hidden="true">
+            <div class="overlay__barFill" id="bakeFill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINAL OVERLAY -->
+      <div class="overlay overlay--hidden" id="overlayFinal" role="dialog" aria-modal="true" aria-label="Final">
+        <div class="final">
+          <div class="final__card">
+            <div class="final__top">
+              <div class="final__spark" aria-hidden="true"></div>
+              <div class="final__title">Tachán… 💗</div>
+              <div class="final__subtitle">Una receta hecha con tu esencia + nuestros recuerdos.</div>
+            </div>
+
+            <div class="final__content">
+              <div class="final__dessertWrap" id="dessertWrap">
+                <img src="assets/images/postre-final.png" alt="Postre final" class="final__dessert" draggable="false" />
+                <div class="final__shine" aria-hidden="true"></div>
+
+                <!-- Stickers land here -->
+                <div class="sticker-layer" id="stickerLayer" aria-hidden="true"></div>
+              </div>
+
+              <div class="final__memories">
+                <div class="memories__title">Lo que me encanta de ti (hoy y siempre):</div>
+                <div class="chips" id="finalChips" aria-label="Lista"></div>
+
+                <div class="final__msg" id="finalMsg">
+                  <div class="final__big">
+                    6 cosas que me encantan de ti<br />
+                    3 recuerdos que atesoro<br />
+                    y una historia que quiero seguir escribiendo 💗
+                  </div>
+                </div>
+
+                <div class="final__buttons">
+                  <button class="btn btn--yes" id="btnKiss" type="button">✨ Dame un beso cuando termines esto</button>
+                  <button class="btn btn--ghost" id="btnPlayAgain" type="button">💞 Repetir nuestra receta</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="final__bottom">
+              <span class="final__tiny">Hecho con amor, blush, azúcar y JavaScript ✨</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Confetti -->
+      <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+    </section>
+
+    <footer class="footer">
+      <span>💗</span>
+    </footer>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
