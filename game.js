@@ -6,7 +6,7 @@
     {
       id: "flores",
       name: "Flores",
-      desc: "Qué puedo decir 🌷",
+      desc: "Y las rosas rosadas especialmente 🌷",
       tag: "Ternura",
       img: "assets/images/ingredientes/flores.png",
     },
@@ -797,3 +797,4 @@
   // Make sure confetti canvas is correctly sized even before final
   resizeConfetti();
 })();
+
